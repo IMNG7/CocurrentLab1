@@ -2,6 +2,9 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <unistd.h>
+#include <getopt.h>
+#include <string.h>
 
 using namespace std;
 
@@ -13,19 +16,63 @@ void merge(vector<int> &nums,int left,int middle,int right);
 void quicksort(vector<int> &nums,int left,int right);
 int seperate(vector<int> &nums,int left,int right);
 
-int main(int argc, char **args)
-{
-	string filename(args[1]);
+int main(int argc, char *args[])
+{	int c;
+	string input_file,output_file,algorithm;
+	while(1)
+	{
+		int count = 0;
+		
+		static struct option long_options[] = {
+			{"name",	no_argument,	0,	'n'},
+			{"output",	required_argument,	0,	'o'},
+			{"alg", 	required_argument,	0,	'a'},
+			{0,			0,					0,	0}
+		};
+		c= getopt_long(argc,args,"no:a:",long_options,&count);
+		if(c==-1)	break;
+		switch(c)
+		{
+			case 'n' :	
+						cout<<"\n\r Name:NITIK SATISH GUPTA:";
+						break;
+			case 'o' : 	
+						output_file = optarg;
+						break;
+			case 'a' :	
+						algorithm = optarg;
+						break;
+			default	:	
+						break;
+		}
+	}
+	if(optind < argc)
+	{
+		while(optind < argc)
+		{	
+			input_file = args[optind++];
+		}
+	}
+
+	string filename(input_file);
 	vector<int> UnsortedArray = ConvertToVector(filename);
-	//vector<string> UnsortedArray = ConvertToVector(filename);
+	cout<<"\n\r Input Array: \n\r";
 	printIntVector(UnsortedArray);
-	cout<<"\n"<<UnsortedArray.size();
-	//vector<int> SortedArray = UnsortedArray;
-	//mergesort(UnsortedArray,0,UnsortedArray.size()-1);
-	quicksort(UnsortedArray,0,UnsortedArray.size()-1);
-	cout<<"\n";
+	if(algorithm == "merge")
+	{
+		mergesort(UnsortedArray,0,UnsortedArray.size()-1);
+		cout<<"\n\rDoing mergesort";
+	}
+	else if(algorithm == "quick")
+	{	
+		quicksort(UnsortedArray,0,UnsortedArray.size()-1);
+		cout<<"\n\rDoing quicksort";
+	}
+	else
+		cout<<"Wrong Choice";
+	cout<<"\n\r Sorted Array:\n\r";
 	printIntVector(UnsortedArray);
-	//printString(UnsortedArray);
+
 	return 0;
 }
 vector<int> ConvertToVector(const string& filename)
