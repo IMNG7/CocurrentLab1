@@ -2,9 +2,8 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-#include <unistd.h>
 #include <getopt.h>
-#include <string.h>
+#include <fstream>
 
 using namespace std;
 
@@ -15,6 +14,7 @@ void mergesort(vector<int> &nums,int left,int right);
 void merge(vector<int> &nums,int left,int middle,int right);
 void quicksort(vector<int> &nums,int left,int right);
 int seperate(vector<int> &nums,int left,int right);
+void add_to_file(vector<int> &nums,string filename);
 
 int main(int argc, char *args[])
 {	int c;
@@ -24,7 +24,7 @@ int main(int argc, char *args[])
 		int count = 0;
 		
 		static struct option long_options[] = {
-			{"name",	no_argument,	0,	'n'},
+			{"name",	no_argument,		0,	'n'},
 			{"output",	required_argument,	0,	'o'},
 			{"alg", 	required_argument,	0,	'a'},
 			{0,			0,					0,	0}
@@ -70,10 +70,22 @@ int main(int argc, char *args[])
 	}
 	else
 		cout<<"Wrong Choice";
+	add_to_file(UnsortedArray,output_file);
 	cout<<"\n\r Sorted Array:\n\r";
 	printIntVector(UnsortedArray);
 
 	return 0;
+}
+void add_to_file(vector<int> &nums,string filename)
+{
+	cout<<filename;
+	fstream file;
+	file.open(filename, ios::trunc | ios::in | ios::out);
+	for(int i=0;i<nums.size();i++)
+	{
+		file<<nums[i]<<endl;
+	}
+	
 }
 vector<int> ConvertToVector(const string& filename)
 {
