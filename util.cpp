@@ -49,6 +49,11 @@ vector<int> ConvertToVector(const string& filename)
 		{
 			nums.push_back(line);
 		}
+		if(nums.empty())
+		{
+			cout<<"\n\r Nothing in File. EXITING";
+			exit(0);
+		}
 		// Store the string values in vector
 		for(int i=0;i<nums.size();i++)
 		{
