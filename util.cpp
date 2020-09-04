@@ -49,6 +49,7 @@ vector<int> ConvertToVector(const string& filename)
 		{
 			nums.push_back(line);
 		}
+		// Check file if it is empty. if empty, exit program.
 		if(nums.empty())
 		{
 			cout<<"\n\r Nothing in File. EXITING";
