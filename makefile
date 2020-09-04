@@ -1,11 +1,14 @@
 
 #Makefile for the Lab0 for ECEN 5033
 
-mysort: main.o util.o quicksort.o mergesort.o
-	g++ main.o util.o quicksort.o mergesort.o -o mysort
+DEPS = main.o util.o quicksort.o mergesort.o
+CC = g++
+
+mysort: ${DEPS}
+	${CC} ${DEPS} -o $@
 
 *.o: *.cpp *.h
-	g++ -c *.cpp
+	${CC} -c *.cpp
 
 clean :
 	rm mysort *.o
