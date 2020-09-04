@@ -4,6 +4,8 @@
 DEPS = main.o util.o quicksort.o mergesort.o
 CC = g++
 
+all: mysort
+
 mysort: ${DEPS}
 	${CC} ${DEPS} -o $@
 
