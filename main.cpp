@@ -43,7 +43,8 @@ int main(int argc, char *args[])
 		{
 			case 'n' :	
 						// Full name of Developer
-						cout<<"\n\r Name:NITIK SATISH GUPTA:";		
+						cout<<"\n\r Name:NITIK SATISH GUPTA:";
+						return 0;	
 						break;
 			case 'o' : 	
 						//Saves the output file name in the variable
